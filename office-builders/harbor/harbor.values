@@ -1,3 +1,5 @@
+adminPassword: Onceas!@#
+
 internalTLS:
   enabled: false
 
@@ -63,3 +65,6 @@ persistence:
     registry:
       size: 100Gi
       existingClaim: harbor-registry
+    trivy:
+      size: 100Gi
+      existingClaim: harbor-trivy
