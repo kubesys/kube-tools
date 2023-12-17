@@ -1,0 +1,65 @@
+internalTLS:
+  enabled: false
+
+externalDatabase:
+  host: kube-database.kube-stack
+  user: postgres
+  password: onceas
+  coreDatabase: harbor
+
+externalRedis:
+  host: kube-caching.kube-stack
+  password: onceas
+
+postgresql:
+  enabled: false
+
+tracing:
+  enabled: false
+
+redis:
+  enabled: false
+
+nginx:
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      effect: NoSchedule
+
+portal:
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      effect: NoSchedule
+
+core:
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      effect: NoSchedule
+
+jobservice:
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      effect: NoSchedule
+
+registry:
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      effect: NoSchedule
+
+trivy:
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      effect: NoSchedule
+
+exporter:
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      effect: NoSchedule
+
+persistence:
+  persistentVolumeClaim:
+    jobservice:
+      size: 10Gi
+      existingClaim: harbor-jobservice
+    registry:
+      size: 100Gi
+      existingClaim: harbor-registry
