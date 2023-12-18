@@ -1,23 +1,23 @@
-group="timbru31"
-image="java-node"
-name="openjdk"
-version="17-jdk-18"
-newv="17"
+group="cartesi"
+image="python"
+name="python"
+version="3.10-slim"
+newv="3.10-slim"
 repo="g-ubjg5602-docker.pkg.coding.net/iscas-system/base-images"
 
-docker rmi $group/$image:$version
-docker pull --platform=linux/amd64 $group/$image:$version
-docker tag $group/$image:$version $repo/$name:$newv-amd64
+docker rmi $image:$version
+docker pull --platform=linux/amd64 $image:$version
+docker tag $image:$version $repo/$name:$newv-amd64
+
+docker rmi $image:$version
+docker pull --platform=linux/arm64 $image:$version
+docker tag $image:$version $repo/$name:$newv-arm64
+docker rmi $image:$version
 
 docker rmi $group/$image:$version
-docker pull --platform=linux/arm64 $group/$image:$version
-docker tag $group/$image:$version $repo/$name:$newv-arm64
-docker rmi $group/$image:$version
-
-docker rmi $group/$image:$version
-docker pull --platform=linux/riscv64 $group/$image:$version
-docker tag $group/$image:$version $repo/$name:$newv-riscv64
-docker rmi $group/$image:$version
+docker pull --platform=linux/riscv64 $group/$image:$version-jammy
+docker tag $group/$image:$version-jammy $repo/$name:$newv-riscv64
+docker rmi $group/$image:$version-jammy
 
 docker push $repo/$name:$newv-amd64
 docker push $repo/$name:$newv-arm64

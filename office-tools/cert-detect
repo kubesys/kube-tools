@@ -1,0 +1,16 @@
+name=$1
+ns=$2
+
+start=$(kubectl get secret $1 -n $2 -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -text | grep 'Before' | awk '{print$6}')
+end=$(kubectl get secret $1 -n $2 -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -text | grep 'After' | awk '{print$7}')
+
+year=$((end-start))
+
+#echo $end-$start=$year
+
+if [ $year -gt 9 ]
+then
+  echo "$ns.$name证书有效期大于等于10年"
+else
+  echo "$ns.$name证书有效期只有$year年"
+fi
