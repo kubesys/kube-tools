@@ -7,6 +7,7 @@ docker rmi $image:$version
 docker pull --platform=linux/amd64 $image:$version
 docker tag $image:$version $repo/$image:$version-amd64
 docker rmi $image:$version
+
 docker pull --platform=linux/arm64 $image:$version
 docker tag $image:$version $repo/$image:$version-arm64
 docker rmi $image:$version
